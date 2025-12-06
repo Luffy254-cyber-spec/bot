@@ -1,0 +1,167 @@
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    height: 100%;
+    background-color: #000;
+    color: white;
+    overflow: hidden;
+}
+
+.background {
+    background: radial-gradient(circle at top left, #6a0080, #000 60%),
+                radial-gradient(circle at bottom right, #4a0072, #000 60%);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 40px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden; /* For inner glow effects */
+}
+
+/* Subtle grid/dots overlay if possible - simplified here */
+
+.logo {
+    font-size: 2.5em;
+    font-weight: 800;
+    margin: 0 0 10px 0;
+}
+
+h2 {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin: 0 0 15px 0;
+}
+
+.description {
+    font-size: 0.9em;
+    color: #ccc;
+    line-height: 1.5;
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.95em;
+    color: #ddd;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    font-size: 1em;
+    box-sizing: border-box; /* Fix padding issue */
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.input-group input:focus {
+    border-color: #d500f9;
+}
+
+.agreement {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    font-size: 0.9em;
+}
+
+.agreement a {
+    color: white;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.create-btn {
+    background: linear-gradient(90deg, #ff1744, #d500f9);
+    border: none;
+    padding: 15px 40px;
+    border-radius: 50px;
+    color: white;
+    font-weight: bold;
+    font-size: 1em;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(213, 0, 249, 0.4);
+    transition: transform 0.2s;
+}
+
+.create-btn:hover {
+    transform: scale(1.05);
+}
+
+.create-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.footer-login {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 40px;
+    gap: 15px;
+}
+
+.login-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px 25px;
+    border-radius: 50px;
+    color: white;
+    cursor: pointer;
+}
+
+.result-area {
+    margin-top: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.code-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    font-family: monospace;
+    font-size: 1.5em;
+    color: #d500f9;
+}
+
+#copyBtn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 0.5em;
+}

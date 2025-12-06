@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bot Pairing</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="background">
+        <div class="card">
+            <h1 class="logo">Bot</h1>
+            <h2>Create Bot</h2>
+            <p class="description">
+                In this Demo you can create a bot using an unverified number..Please log in to get the most exciting
+                experience
+            </p>
+
+            <form id="pairForm">
+                <label for="phone">Phone Number</label>
+                <div class="input-group">
+                    <input type="text" id="phone" name="phone" placeholder="Ex: 07XXXXXXXX" required>
+                </div>
+
+                <div class="agreement">
+                    <span>I agree <a href="#">Terms & Privacy</a></span>
+                    <input type="checkbox" required>
+                </div>
+
+                <button type="submit" class="create-btn" id="submitBtn">Create</button>
+            </form>
+
+            <div class="footer-login">
+                <span>You Have Account ?</span>
+                <button class="login-btn">Login</button>
+            </div>
+
+            <div id="result" class="result-area hidden">
+                <h3>Pairing Code:</h3>
+                <div class="code-display">
+                    <span id="pairingCode">Loading...</span>
+                    <button id="copyBtn">Copy</button>
+                </div>
+            </div>
+
+            <div class="sessions-area">
+                <h3>Active Bots</h3>
+                <ul id="sessionList"></ul>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
