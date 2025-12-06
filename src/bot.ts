@@ -28,7 +28,12 @@ export async function startBot(phoneNumber: string, readdir = false) {
         logger: pino({ level: 'silent' }) as any,
         printQRInTerminal: false,
         auth: state,
-        browser: ["Ubuntu", "Chrome", "20.0.04"]
+        browser: ["Ubuntu", "Chrome", "20.0.04"],
+        connectTimeoutMs: 60000,
+        defaultQueryTimeoutMs: 0,
+        keepAliveIntervalMs: 10000,
+        emitOwnEvents: true,
+        retryRequestDelayMs: 250
     });
 
     sessions.set(phoneNumber, sock);
@@ -95,17 +100,35 @@ export async function pairDevice(phoneNumber: string): Promise<string> {
     const sock = await startBot(phoneNumber);
 
     return new Promise<string>((resolve, reject) => {
-        setTimeout(async () => {
-            try {
-                if (!sock.authState.creds.registered) {
-                    const code = await sock.requestPairingCode(phoneNumber);
-                    resolve(code);
-                } else {
-                    resolve("Already Registered");
-                }
-            } catch (err: any) {
-                reject(err);
+        let retries = 0;
+        const maxRetries = 20; // Wait up to 10 seconds (500ms * 20)
+
+        const checkConnection = async () => {
+            if (sock.authState.creds.registered) {
+                resolve("Already Registered");
+                return;
             }
-        }, 3000);
+
+            try {
+                // Attempt to request code
+                const code = await sock.requestPairingCode(phoneNumber);
+                resolve(code);
+            } catch (err: any) {
+                if (retries < maxRetries && err.message === 'Connection Closed') {
+                    // unexpected disconnect, wait and retry
+                    retries++;
+                    setTimeout(checkConnection, 500);
+                } else if (retries < maxRetries) {
+                    // other errors, maybe wait a bit
+                    retries++;
+                    setTimeout(checkConnection, 500);
+                } else {
+                    reject(err);
+                }
+            }
+        };
+
+        // Delay start slightly to allow socket init
+        setTimeout(checkConnection, 2000);
     });
 }
